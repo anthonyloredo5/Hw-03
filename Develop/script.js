@@ -2,7 +2,8 @@
 var generateBtn = document.querySelector("#generate");
 var pLength;
 var cTypes;
-  // which criteria to include in the password
+
+// which criteria to include in the password
 //Loops until user provides correct input
 while (true) {
   //prompted for password length at least 8 characters and no more than 128 characters
@@ -32,7 +33,7 @@ while (true) {
 }
 
 //Loops until user provides correct input
-while (true){
+while (true) {
   //prompted for character types
   cTypes = prompt("Choose character types to include in your password below: " + "\n" + "-lowercase" + "\n" + "-uppercase" + "\n" + "-numeric" + "\n" + "-special characters");
   cTypes = cTypes.toLowerCase(); //Sanatizes user input
@@ -60,7 +61,8 @@ while (true){
 
 }
 
-var speciacharacters = ['@','%',
+// Array of numeric characters to be included in password
+var speciacharacters = ['@', '%',
   '+',
   '\\',
   '/',
@@ -152,16 +154,16 @@ var uppercase = [
 function writePassword() {
 
   //Using if-else statements to compare user input in order to select which array to build from 
-  if(cTypes == "numeric"){
+  if (cTypes == "numeric") {
     var password = generatePassword(numeric);
   }
-  else if(cTypes == "lowercase"){
+  else if (cTypes == "lowercase") {
     var password = generatePassword(lowercase);
   }
-  else if(cTypes == "uppercase"){
+  else if (cTypes == "uppercase") {
     var password = generatePassword(uppercase);
   }
-  else if(cTypes == "special characters"){
+  else if (cTypes == "special characters") {
     var password = generatePassword(speciacharacters);
   }
 
@@ -170,11 +172,11 @@ function writePassword() {
 }
 
 //Password Generator that takes in an array and produces random indexes to fill an empty the contains the new password
-function generatePassword(array){
+function generatePassword(array) {
   var temp = array;
   var nTemp = [];
 
-  for(var i = 0; i < pLength; i++){
+  for (var i = 0; i < pLength; i++) {
     nTemp += temp[Math.floor(Math.random() * temp.length)];
   }
   return nTemp;
