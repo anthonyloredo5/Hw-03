@@ -176,9 +176,11 @@ function writePassword() {
     }
   }
 
+  //Generates password using the array built in the for loop
   Fpassword = generatePassword(nnPassword);
   var passwordText = document.querySelector("#password");
   passwordText.value = Fpassword;
+  //checks if the concat worked
   console.log(nnPassword);
 }
 
