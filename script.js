@@ -2,6 +2,7 @@
 var generateBtn = document.querySelector("#generate");
 var pLength;
 var cTypes;
+var cTypes2 = [];
 
 // which criteria to include in the password
 //Loops until user provides correct input
@@ -33,33 +34,42 @@ while (true) {
 }
 
 //Loops until user provides correct input
-while (true) {
-  //prompted for character types
-  cTypes = prompt("Choose character types to include in your password below: " + "\n" + "-lowercase" + "\n" + "-uppercase" + "\n" + "-numeric" + "\n" + "-special characters");
-  cTypes = cTypes.toLowerCase(); //Sanatizes user input
+for (var i = 0; i < 4; i++) {
+  //array to display to the user sequentially what options they have within the prompt
+  var cChoices = ["lowercase", "uppercase", "numeric", "special"];
+  while (true) {
+    //prompted for character types
+    cTypes = prompt("Would you like to include " + cChoices[i] + " characters in your password ?" + "\n" + "Please enter yes or no.");
+    cTypes = cTypes.toLowerCase(); //Sanatizes user input
+    cTypes = cTypes.trim();//Sanatizes user input
 
-  //Object testing if user input is correct
-  var Obj2 = {
-    function2(userS2) {
-      if (userS2 == "lowercase" || userS2 == "uppercase" || userS2 == "numeric" || userS2 == "special characters") {
-        return true;
+    //Object testing if user input is correct
+    var Obj2 = {
+      function2(userS2) {
+        if (userS2 == "yes" || userS2 == "no") {
+          return true;
+        }
+        else {
+          return false;
+        }
       }
-      else {
-        return false;
-      }
+    };
+
+    //Breaks loop when userInput is correct--Repeats loop if userInput is incorrect
+    var check2 = Obj2.function2(cTypes);
+    if (check2) {
+      break;
     }
-  };
-
-  //Breaks loop when userInput is correct--Repeats loop if userInput is incorrect
-  var check2 = Obj2.function2(cTypes);
-  if (check2) {
-    break;
+    else {
+      alert("You must select either yes or no.");
+    }
   }
-  else {
-    alert("You must select a type from the selected options.");
-  }
-
+  //Fills array with user input
+  cTypes2[i] = cTypes;
 }
+
+//checks if user input is stored correctly
+console.log(cTypes2);
 
 // Array of numeric characters to be included in password
 var speciacharacters = ['@', '%',
@@ -83,11 +93,11 @@ var speciacharacters = ['@', '%',
   '~',
   '-',
   '_',
-  '.'
+  '.',
 ];
 
 // Array of numeric characters to be included in password
-var numeric = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var numeric = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',];
 
 // Array of lowercase characters to be included in password
 var lowercase = [
@@ -116,7 +126,7 @@ var lowercase = [
   'w',
   'x',
   'y',
-  'z'
+  'z',
 ];
 
 // Array of uppercase characters to be included in password
@@ -146,29 +156,30 @@ var uppercase = [
   'W',
   'X',
   'Y',
-  'Z'
+  'Z',
 ];
+
 
 
 // Write password to the #password input
 function writePassword() {
+  console.log(cTypes2);
+  var Fpassword = [];
+  var nnPassword = [];
 
+  //Using an array to dynamically change the character arrays we select from
+  var sArrays = [lowercase, uppercase, numeric, speciacharacters];
   //Using if-else statements to compare user input in order to select which array to build from 
-  if (cTypes == "numeric") {
-    var password = generatePassword(numeric);
-  }
-  else if (cTypes == "lowercase") {
-    var password = generatePassword(lowercase);
-  }
-  else if (cTypes == "uppercase") {
-    var password = generatePassword(uppercase);
-  }
-  else if (cTypes == "special characters") {
-    var password = generatePassword(speciacharacters);
+  for (var i = 0; i < 4; i++) {
+    if (cTypes2[i] == "yes") {
+      nnPassword = nnPassword.concat(sArrays[i]);
+    }
   }
 
+  Fpassword = generatePassword(nnPassword);
   var passwordText = document.querySelector("#password");
-  passwordText.value = password;
+  passwordText.value = Fpassword;
+  console.log(nnPassword);
 }
 
 //Password Generator that takes in an array and produces random indexes to fill an empty the contains the new password
@@ -178,6 +189,7 @@ function generatePassword(array) {
 
   for (var i = 0; i < pLength; i++) {
     nTemp += temp[Math.floor(Math.random() * temp.length)];
+
   }
   return nTemp;
 }
