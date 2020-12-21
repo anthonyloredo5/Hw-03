@@ -4,72 +4,10 @@ var pLength;
 var cTypes;
 var cTypes2 = [];
 
-// which criteria to include in the password
-//Loops until user provides correct input
-while (true) {
-  //prompted for password length at least 8 characters and no more than 128 characters
-  pLength = prompt("How long should your password be ? ");
-  pLength = Number(pLength); //Convert string input into int
 
-  //Object testing if user input is correct
-  var Obj = {
-    function(userS) {
-      if (userS >= 8 && userS <= 128) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    }
-  };
-
-  //Breaks loop when userInput is correct--Repeats loop if userInput is incorrect
-  var check = Obj.function(pLength);
-  if (check) {
-    break;
-  }
-  else {
-    alert("Password needs to be at least 8 characters and no more than 128 characters.");
-  }
-}
-
-//Loops until user provides correct input
-for (var i = 0; i < 4; i++) {
-  //array to display to the user sequentially what options they have within the prompt
-  var cChoices = ["lowercase", "uppercase", "numeric", "special"];
-  while (true) {
-    //prompted for character types
-    cTypes = prompt("Would you like to include " + cChoices[i] + " characters in your password ?" + "\n" + "Please enter yes or no.");
-    cTypes = cTypes.toLowerCase(); //Sanatizes user input
-    cTypes = cTypes.trim();//Sanatizes user input
-
-    //Object testing if user input is correct
-    var Obj2 = {
-      function2(userS2) {
-        if (userS2 == "yes" || userS2 == "no") {
-          return true;
-        }
-        else {
-          return false;
-        }
-      }
-    };
-
-    //Breaks loop when userInput is correct--Repeats loop if userInput is incorrect
-    var check2 = Obj2.function2(cTypes);
-    if (check2) {
-      break;
-    }
-    else {
-      alert("You must select either yes or no.");
-    }
-  }
-  //Fills array with user input
-  cTypes2[i] = cTypes;
-}
 
 //checks if user input is stored correctly
-console.log(cTypes2);
+//console.log(cTypes2);
 
 // Array of numeric characters to be included in password
 var speciacharacters = ['@', '%',
@@ -163,6 +101,73 @@ var uppercase = [
 
 // Write password to the #password input
 function writePassword() {
+
+//put all alerts in button click function
+// which criteria to include in the password
+//Loops until user provides correct input
+while (true) {
+  //prompted for password length at least 8 characters and no more than 128 characters
+  pLength = prompt("How long should your password be ?" + "\n" + "It should be at least 8 characters and no more than 128 characters.");
+  pLength = Number(pLength); //Convert string input into int
+
+  //Object testing if user input is correct
+  var Obj = {
+    function(userS) {
+      if (userS >= 8 && userS <= 128) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+  };
+
+  //Breaks loop when userInput is correct--Repeats loop if userInput is incorrect
+  var check = Obj.function(pLength);
+  if (check) {
+    break;
+  }
+  else {
+    alert("Password needs to be at least 8 characters and no more than 128 characters.");
+  }
+}
+
+//Loops until user provides correct input
+for (var i = 0; i < 4; i++) {
+  //array to display to the user sequentially what options they have within the prompt
+  var cChoices = ["lowercase", "uppercase", "numeric", "special"];
+  while (true) {
+    //prompted for character types
+    cTypes = prompt("Would you like to include " + cChoices[i] + " characters in your password ?" + "\n" + "Please enter yes or no.");
+    cTypes = cTypes.toLowerCase(); //Sanatizes user input
+    cTypes = cTypes.trim();//Sanatizes user input
+
+    //Object testing if user input is correct
+    var Obj2 = {
+      function2(userS2) {
+        if (userS2 == "yes" || userS2 == "no") {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+    };
+
+    //Breaks loop when userInput is correct--Repeats loop if userInput is incorrect
+    var check2 = Obj2.function2(cTypes);
+    if (check2) {
+      break;
+    }
+    else {
+      alert("You must select either yes or no.");
+    }
+  }
+  //Fills array with user input
+  cTypes2[i] = cTypes;
+}
+
+//checks to see if the array reached this point
   console.log(cTypes2);
   var Fpassword = [];
   var nnPassword = [];
